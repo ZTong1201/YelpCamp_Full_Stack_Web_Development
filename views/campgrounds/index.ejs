@@ -1,0 +1,89 @@
+<% include ../partials/headers %>
+
+<header class="jumbotron">
+    <div class="container">
+        <h1>
+            Welcome to YelpCamp!
+        </h1>
+        <p>
+            View the best campgrounds from all over the world
+        </p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add New Campground</a>
+        </p>
+    </div>
+</header>
+<div class="row text-center" id="campground-grid">
+    <% campgrounds.forEach((campground) => { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div id="campCard" class="card">
+                    <img class="image" src="<%= campground.image %>" class="card-img-top" alt="<%= campground.name %>">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= campground.name %></h5>
+                        <div>
+                            <span class="badge badge-secondary"><i class="fas fa-thumbs-up"></i> <%= campground.likes.length %></span>
+                        </div>
+                        <p>
+                            <% if (campground.rating === 0) { %>
+                                <em>No reviews yet.</em>
+                            <% } else { %>
+                                <span class="<%= campground.rating > 0.5 ? 'fa fa-star checked' : 'far fa-star' %>"></span>
+                                <span class="<%= campground.rating > 1.5 ? 'fa fa-star checked' : 'far fa-star' %>"></span>
+                                <span class="<%= campground.rating > 2.5 ? 'fa fa-star checked' : 'far fa-star' %>"></span>
+                                <span class="<%= campground.rating > 3.5 ? 'fa fa-star checked' : 'far fa-star' %>"></span>
+                                <span class="<%= campground.rating > 4.5 ? 'fa fa-star checked' : 'far fa-star' %>"></span>
+                            <% } %>
+                        </p>
+                        <p class="card-text">
+                            <a href="/campgrounds/<%= campground._id%>" class="btn btn-primary">More Info</a>
+                        </p>
+                    </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
+<nav aria-label="Page navigation">
+    <% if (pages && pages > 0) { %>
+    <ul class="pagination justify-content-center">
+        <% if (currentPage == 1) { %>
+        <li class="page-item disabled"><a class="page-link">First</a></li>
+        <% } else { %>
+        <li><a class="page-link" href="/campgrounds">First</a></li>
+        <% } %>
+ 
+        <% if (currentPage == 1) { %>
+        <li class="page-item disabled"><a class="page-link">«</a></li>
+        <% } else { %>
+        <li><a class="page-link" href="/campgrounds?page=<%= Number(currentPage) - 1 %>">«</a></li>
+        <% } %>
+ 
+        <% var i = (Number(currentPage) > 5 ? Number(currentPage) - 4 : 1) %>
+        <% if (i !== 1) { %>
+        <li class="page-item disabled"><a class="page-link">...</a></li>
+        <% } %>
+        <% for (; i <= (Number(currentPage) + 4) && i <= pages; i++) { %>
+        <% if (i == currentPage) { %>
+        <li class="active"><a class="page-link"><%= i %></a></li>
+        <% } else { %>
+        <li><a class="page-link" href="/campgrounds?page=<%= i %>"><%= i %></a></li>
+        <% } %>
+        <% if (i == Number(currentPage) + 4 && i < pages) { %>
+        <li class="page-item disabled"><a class="page-link">...</a></li>
+        <% } %>
+        <% } %>
+ 
+        <% if (currentPage == pages) { %>
+        <li class="page-item disabled"><a class="page-link">»</a></li>
+        <% } else { %>
+        <li><a class="page-link" href="/campgrounds?page=<%= Number(currentPage) + 1 %>">»</a></li>
+        <% } %>
+ 
+        <% if (currentPage == pages) { %>
+        <li class="page-item disabled"><a class="page-link">Last</a></li>
+        <% } else { %>
+        <li><a class="page-link" href="/campgrounds?page=<%= pages %>">Last</a></li>
+        <% } %>
+    </ul>
+    <% } %>
+</nav>
+<% include ../partials/footers %>
