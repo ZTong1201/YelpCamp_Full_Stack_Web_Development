@@ -6,3 +6,12 @@ posts, and more!
 
 You can try to visit the website by this link: [YelpCamp Collections](https://yelpcampcollections.herokuapp.com/)
 
+Funtionalities | Tools/Frameworks
+--------------- | ---------------
+Front-End | HTML5, CSS3, Bootstrap 4, JavaScript
+Backend | Node.js
+Database | MongoDB
+Server-side Framework | Express.js
+Routes | RESTful APIs
+Authentication/Authorization | Passport.js, Passport-local
+
