@@ -15,3 +15,5 @@ Server-side Framework | Express.js
 Routes | RESTful APIs
 Authentication/Authorization | Passport.js, Passport-local
 
+Here are some pictures of how the app works.
+1.Landing Page
